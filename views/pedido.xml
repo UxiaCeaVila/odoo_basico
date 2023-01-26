@@ -1,0 +1,53 @@
+<odoo>
+    <data>
+        <record model="ir.actions.act_window" id="pedido_list_action">
+            <field name="name">A acción de pedido</field>
+            <field name="res_model">odoo_basico.pedido</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">Tes que crear o primeiro rexistro</p>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="pedido_tree_view">
+            <field name="name">pedido.tree</field>
+            <field name="model">odoo_basico.pedido</field>
+            <field name="arch" type="xml">
+                <tree string="Tree para pedido" >
+                    <field name="name"/>
+                    <field name="data_hora"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="pedido_form_view">
+            <field name="name">pedido.form</field>
+            <field name="model">odoo_basico.pedido</field>
+            <field name="arch" type="xml">
+                <form string="Form para pedido" >
+                    <header>
+                        <button name="actualizadorSexo" type="object" string="Actualiza o campo Sexo do modelo información"/>
+                        <button name="creaRexistroInformacion" type="object" string="Crea un rexistro no modelo información"/>
+                        <button name="actualizaRexistroInformacion" type="object" string="Actualiza o rexistro creado no modelo información"/>
+                    </header>
+                    <group>
+                        <field name="name"/>
+                        <field name="data_hora"/>
+                    </group>
+                    <separator string="Visualizar e engadir"/>
+                    <field name="lineapedido_ids"/>
+                    <!--  Se quixesemos que non se poideran editar as lineapedido:-->
+                    <!--   <separator string="Só visualizar"/>-->
+                    <!--   <field name="lineapedido_ids" readonly="1"/>-->
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="pedido_search_view">
+            <field name="name">pedido.search</field>
+            <field name="model">odoo_basico.pedido</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+    </data>
+</odoo>

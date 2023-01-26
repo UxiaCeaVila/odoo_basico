@@ -20,7 +20,17 @@ class informacion(models.Model):
     volume = fields.Float(compute="_volume",string="Volume en Metros Cúbicos",digits=(6,6), store=True)
     densidade = fields.Float(compute="_densidade",string="Densidade en Kgs/Metros Cúbicos", store=True)
     literal = fields.Char(store=False)
+    foto = fields.Binary(string='Foto')
+    adxunto_nome = fields.Char(string="Nome Adxunto")
+    adxunto = fields.Binary(string="Arquivo adxunto")
+    moeda_id = fields.Many2one('res.currency', domain="[('position','=','after')]")
+    moeda_euro_id = fields.Many2one('res.currency', default=lambda self: self.env['res.currency'].search([('name', '=', "EUR")],limit=1))
+    moeda_en_texto = fields.Char(related="moeda_id.currency_unit_label",string="Moeda en formato texto",store=True)
 
+    creador_da_moeda = fields.Char(related="moeda_id.create_uid.login",
+                                   string="Usuario creador da moeda", store=True)
+
+    gasto_en_euros = fields.Monetary("Gasto en euros", 'moeda_euro_id')
     @api.depends('alto_en_cms', 'longo_en_cms', 'ancho_en_cms')
     def _volume(self):
       for rexistro in self:
@@ -46,3 +56,6 @@ class informacion(models.Model):
         for rexistro in self:
             if rexistro.peso < 1 or rexistro.peso > 6:
                 raise ValidationError('Os peso de %s ten que ser entre 1 e 6 ' % rexistro.name)
+
+    def _cambia_campo_sexo(self, rexistro):
+        rexistro.sexo_traducido = "Hombre"

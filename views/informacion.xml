@@ -14,8 +14,11 @@
             <field name="name">informacion.grafico</field>
             <field name="model">odoo_basico.informacion</field>
             <field name="arch" type="xml">
-                <graph string="densidade" type="bar">
-                    <field name="densidade" type="row"/>
+                <graph string="Datos" type="bar">
+                    <!--                    <field name="alto_en_cms" type="row"/>-->
+                    <!--                    <field name="ancho_en_cms" type="row"/>-->
+                    <!--                    <field name="longo_en_cms" type="row"/>-->
+                    <field name="name" type="row"/>
                 </graph>
             </field>
         </record>
@@ -79,9 +82,21 @@
                                 <field name="densidade"/>
                             </group>
                         </page>
+                        <page string="Datos binario">
+                            <group>
+                                <field name="foto" widget="image" class="oe_avatar"/>
+                                <field name="foto" widget="image"/>
+                                <field name="adxunto_nome" invisible="1"/>
+                                <field name="adxunto" filename="adxunto_nome"/>
+                            </group>
+                        </page>
                         <page string="Moedas">
                             <group>
-
+                                <field name="moeda_id"/>
+                                <field name="moeda_en_texto"/>
+                                <field name="creador_da_moeda"/>
+                                <field name="moeda_euro_id" invisible="1"/>
+                                <field name="gasto_en_euros"/>
                             </group>
                         </page>
                         <page string="Datas">
@@ -104,7 +119,8 @@
             <field name="sort">[]</field>
             <field name="domain">[]</field><!-- Aquí iría o filtro -->
             <field name="user_id"></field><!-- En blanco para que esté dispoñible para todos os usuarios -->
-            <field name="action_id" eval="ref('odoo_basico.informacion_list_action')"/><!-- Obtemos o id a partir do id externo-->
+            <field name="action_id"
+                   eval="ref('odoo_basico.informacion_list_action')"/><!-- Obtemos o id a partir do id externo-->
         </record>
 
         <record model="ir.filters" id="filtro2">
@@ -114,9 +130,12 @@
             <field name="is_default">false</field>
             <field name="active">true</field>
             <field name="sort">[]</field>
-            <field name="domain">['|','&amp;',('autorizado', '=', False),('sexo_traducido', '=', 'Mujer'),('name', '=','Rexistro 3' )]</field><!-- Aquí iría o filtro -->
+            <field name="domain">['|','&amp;',('autorizado', '=', False),('sexo_traducido', '=', 'Mujer'),('name',
+                '=','Rexistro 3' )]
+            </field><!-- Aquí iría o filtro -->
             <field name="user_id"></field><!-- En blanco para que esté dispoñible para todos os usuarios -->
-            <field name="action_id" eval="ref('odoo_basico.informacion_list_action')"/><!-- Obtemos o id a partir do id externo-->
+            <field name="action_id"
+                   eval="ref('odoo_basico.informacion_list_action')"/><!-- Obtemos o id a partir do id externo-->
         </record>
     </data>
 </odoo>
