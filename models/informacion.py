@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
+import os
 
 from odoo import models, fields, api
-from odoo.exceptions import ValidationError
+from odoo.exceptions import ValidationError, RedirectWarning
+
 
 class informacion(models.Model):
     _name = 'odoo_basico.informacion'
@@ -59,3 +61,25 @@ class informacion(models.Model):
 
     def _cambia_campo_sexo(self, rexistro):
         rexistro.sexo_traducido = "Hombre"
+
+    def ver_contexto(self):  # Este método é chamado dende un botón de informacion.xml
+        for rexistro in self:
+            # Para visualizar a mensaxe podemos utilizar ValidationError ou RedirectWarning
+
+            # ValidationError
+            # Ao usar warning temos que importar a libreria mediante from odoo.exceptions import Warning
+            # Importamos tamén a libreria os mediante import os
+            # raise ValidationError(
+            #     'Contexto: %s Ruta: %s Contido %s' % (rexistro.env.context, os.getcwd(), os.listdir(os.getcwd())))
+            # env.context é un diccionario  https://www.w3schools.com/python/python_dictionaries.asp
+
+            #RedirectWarning
+            # vemos o id externo da acción no ficheiro informacion.xml na definición da acción model="ir.actions.act_window"
+            action = self.env.ref('odoo_basico.informacion_list_action')
+            # env.context é un diccionario  https://www.w3schools.com/python/python_dictionaries.asp
+            contexto = rexistro.env.context
+            msg = 'Contexto: %s Ruta: %s Contido %s' % (contexto, os.getcwd(), os.listdir(os.getcwd()))
+            # Importamos a libreria os mediante import os
+            raise RedirectWarning(msg, action.id, ('Aceptar'))
+            # Ao usar RedirectWarning temos que importar a libreria mediante from odoo.exceptions import RedirectWarning
+        return True
