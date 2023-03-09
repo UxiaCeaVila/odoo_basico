@@ -51,6 +51,11 @@
                     <field name="volume"/>
                     <field name="peso"/>
                     <field name="densidade"/>
+                    <field name="data"/>
+                    <field name="data_hora"/>
+                    <field name="hora_utc"/>
+                    <field name="hora_actual"/>
+                    <field name="hora_timezone_usuario"/>
                 </tree>
             </field>
         </record>
@@ -62,6 +67,9 @@
                 <form string="Formulario para Informacion">
                     <header>
                        <button name="ver_contexto" type="object" string="Ver Contexto"/>
+                        <button name="actualiza_hora_actual_UTC" type="object" string="Actualiza Hora Actual a UTC"/>
+                        <button name="actualiza_hora_timezone_usuario_dende_boton_e_apidepends" type="object" string="Actualiza Hora a Timezone do Usuario"  class="oe_highlight"/>
+                        <button name="envio_email" type="object" string="Enviar Email"/>
                     </header>
                     <group>
                         <field name="name"/>
@@ -104,7 +112,19 @@
                         </page>
                         <page string="Datas">
                             <group>
-
+                                <group>
+                                    <field name="data_hora"/>
+                                    <field name="hora_utc"/>
+                                    <field name="hora_actual"/>
+                                    <field name="hora_timezone_usuario"/>
+                                </group>
+                                <group>
+                                    <field name="data"/>
+                                    <field name="mes_castelan"/>
+                                    <field name="mes_galego"/>
+                                    <field name="mes_frances"/>
+                                    <field name="mes_ingles"/>
+                                </group>
                             </group>
                         </page>
                     </notebook>
